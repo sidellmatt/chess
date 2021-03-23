@@ -13,9 +13,13 @@ class Board
 
     def setup_pieces
         (0...rows.length).each do |row|
-            if row <= 1 || row >= 6
+            if row <= 1
                 (0...rows.length).each do |col|
                     @rows[row][col] = Piece.new("white", self, [row, col])
+                end
+            elsif row >= 6
+                (0...rows.length).each do |col|
+                    @rows[row][col] = Piece.new("black", self, [row, col])
                 end
             else
                 (0...rows.length).each do |col|
@@ -41,10 +45,10 @@ class Board
     def move_piece(start_pos, end_pos)
         x, y = start_pos[0], start_pos[1]
         x2, y2 = end_pos[0], end_pos[1]
-        if self[[x,y]].nil?
+        if self[[x,y]].symbol == nil
             raise ArgumentError.new "No piece at start pos"
         end
-        if !self[[x2,y2]].nil?
+        if self[[x2,y2]].color != nil
             raise ArgumentError.new "Cannot move there" 
         end
         piece = self[[x,y]]
