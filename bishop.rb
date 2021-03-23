@@ -1,3 +1,5 @@
+require_relative "slideable_module.rb"
+
 class Bishop < Piece
 
     include Slideable

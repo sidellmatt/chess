@@ -7,8 +7,8 @@ module Slideable
             new_x = self.pos[0] + x
             new_y = self.pos[1] + y
             blocked = false
-            until blocked
-                blocked = true if self.board[new_x][new_y].color != self.color
+            until blocked || !self.board.valid_pos?([new_x, new_y])
+                blocked = true if self.board.rows[new_x][new_y].color == self.color
                 moves_arr << [new_x, new_y] unless blocked
                 new_x += x
                 new_y += y
