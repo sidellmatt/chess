@@ -11,6 +11,7 @@ module Slideable
                 blocked = true if !self.board.valid_pos?([new_x, new_y])
                 blocked = true if self.board.rows[new_x][new_y].color == self.color
                 moves_arr << [new_x, new_y] unless blocked
+                blocked = true if self.board.rows[new_x][new_y].color != self.color && self.board.rows[new_x][new_y].color != nil
                 new_x += x
                 new_y += y
             end
