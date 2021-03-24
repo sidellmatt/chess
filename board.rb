@@ -5,6 +5,7 @@ require_relative "rook.rb"
 require_relative "queen.rb"
 require_relative "knight.rb"
 require_relative "king.rb"
+require_relative "pawn.rb"
 
 class Board
 
@@ -35,11 +36,11 @@ class Board
                 end
             elsif row == 1
                 (0...rows.length).each do |col|
-                    @rows[row][col] = Piece.new("white", self, [row, col]) #Pawns
+                    @rows[row][col] = Pawn.new("white", self, [row, col])
                 end
             elsif row == 6
                 (0...rows.length).each do |col|
-                    @rows[row][col] = Piece.new("black", self, [row, col]) #Pawns
+                    @rows[row][col] = Pawn.new("black", self, [row, col])
                 end
             elsif row == 7
                 (0...rows.length).each do |col|
