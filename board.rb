@@ -3,6 +3,8 @@ require_relative "null_piece.rb"
 require_relative "bishop.rb"
 require_relative "rook.rb"
 require_relative "queen.rb"
+require_relative "knight.rb"
+require_relative "king.rb"
 
 class Board
 
@@ -22,13 +24,13 @@ class Board
                     if col == 0 || col == 7
                         @rows[row][col] = Rook.new("white", self, [row, col])
                     elsif col == 1 || col == 6
-                        @rows[row][col] = Piece.new("white", self, [row, col]) # Knights
+                        @rows[row][col] = Knight.new("white", self, [row, col])
                     elsif col == 2 || col == 5
                         @rows[row][col] = Bishop.new("white", self, [row, col])
                     elsif col == 3
-                        @rows[row][col] = Piece.new("white", self, [row, col]) #King? Queen?
+                        @rows[row][col] = King.new("white", self, [row, col])
                     elsif col == 4
-                        @rows[row][col] = Piece.new("white", self, [row, col]) #King? Queen?
+                        @rows[row][col] = Queen.new("white", self, [row, col])
                     end
                 end
             elsif row == 1
@@ -44,13 +46,13 @@ class Board
                     if col == 0 || col == 7
                         @rows[row][col] = Rook.new("black", self, [row, col])
                     elsif col == 1 || col == 6
-                        @rows[row][col] = Piece.new("black", self, [row, col]) # Knights
+                        @rows[row][col] = Knight.new("black", self, [row, col])
                     elsif col == 2 || col == 5
                         @rows[row][col] = Bishop.new("black", self, [row, col])
                     elsif col == 3
-                        @rows[row][col] = Piece.new("black", self, [row, col]) #King? Queen?
+                        @rows[row][col] = King.new("black", self, [row, col])
                     elsif col == 4
-                        @rows[row][col] = Piece.new("black", self, [row, col]) #King? Queen?
+                        @rows[row][col] = Queen.new("black", self, [row, col])
                     end
                 end
             else
