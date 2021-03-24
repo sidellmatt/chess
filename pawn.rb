@@ -27,13 +27,13 @@ class Pawn < Piece
 
     def forward_steps
         steps = []
-        if self.board.valid_pos?([[self.pos[0] + self.forward_dir, self.pos[1]]])
-            if self.board.rows[self.pos[0] + self.forward_dir][self.pos[1]].color == nil
+        if self.board.valid_pos?([self.pos[0] + self.forward_dir, self.pos[1]])
+            if self.board.rows[self.pos[0] + self.forward_dir][self.pos[1]].color == "purple"
                 steps << [self.pos[0] + self.forward_dir, self.pos[1]]
             end
         end
         if self.at_start_row?
-            steps << [self.pos[0] + (self.forward_dir * 2), self.pos[1]] if self.board.rows[self.pos[0] + (self.forward_dir * 2)][self.pos[1]].color == nil
+            steps << [self.pos[0] + (self.forward_dir * 2), self.pos[1]] if self.board.rows[self.pos[0] + (self.forward_dir * 2)][self.pos[1]].color == "purple"
         end
         steps
     end

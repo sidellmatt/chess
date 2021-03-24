@@ -87,10 +87,10 @@ class Board
     def move_piece(start_pos, end_pos)  # (also take color as an argument)
         x, y = start_pos[0], start_pos[1]
         x2, y2 = end_pos[0], end_pos[1]
-        if self[[x,y]].symbol == nil
+        if self[[x,y]].color != "white" && self[[x,y]].color != "black"
             raise ArgumentError.new "No piece at start pos"
         end
-        if self[[x2,y2]].color != nil
+        if self[[x2,y2]].color != "purple"
             raise ArgumentError.new "Cannot move there" 
         end
         piece = self[[x,y]]
