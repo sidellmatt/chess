@@ -84,7 +84,7 @@ class Board
     end
 
 
-    def move_piece(color, start_pos, end_pos)  # (also take color as an argument)
+    def move_piece(color, start_pos, end_pos)
         x, y = start_pos[0], start_pos[1]
         x2, y2 = end_pos[0], end_pos[1]
         if self[[x,y]].color != color
