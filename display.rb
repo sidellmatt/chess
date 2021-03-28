@@ -25,6 +25,3 @@ class Display
 
 end
 
-board1 = Board.new
-display1 = Display.new(board1)
-display1.render
