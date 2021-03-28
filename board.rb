@@ -100,3 +100,5 @@ class Board
     end
 
 end
+
+board1 = Board.new
