@@ -127,4 +127,20 @@ class Board
 
     end
 
+
+    def checkmate?(color) #have to find if any move gets them out of check, not if there are any valid pos a piece can move to
+        if in_check?(color)
+            (0...rows.length).each do |row_index|
+                (0...rows.length).each do |col_index|
+                    if self[[row_index, col_index]].moves.length > 0
+                        return false
+                    end
+                end
+            end
+            return true
+        else
+            return false
+        end
+    end
+
 end
