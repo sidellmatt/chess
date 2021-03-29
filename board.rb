@@ -99,4 +99,31 @@ class Board
         piece.pos = [x2, y2]
     end
 
+
+    def in_check?(color)
+        opposite = ""
+        if color == "white"
+            opposite = "black"
+        else
+            opposite = "white"
+        end
+        king_pos = nil
+        (0...rows.length).each do |row_idx|
+            (0...rows.length).each do |col_idx|
+                king_pos = [row_idx, col_idx] if rows[row_idx][col_idx].symbol == "K" && rows[row_idx][col_idx].color == color
+            end
+        end
+
+        (0...rows.length).each do |row_index|
+            (0...rows.length).each do |col_index|
+                if rows[row_index][col_index].color == opposite && rows[row_index][col_index].moves.include?(king_pos)
+                    return true
+                end
+            end
+        end
+
+        false
+
+    end
+
 end
