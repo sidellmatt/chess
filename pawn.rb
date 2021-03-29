@@ -41,14 +41,14 @@ class Pawn < Piece
     def side_attacks
         attacks = []
         if self.color == "white"
-            if self.board.rows[self.pos[0] + self.forward_dir][self.pos[1] - 1].color == "black"
+            if self.board.rows[self.pos[0] + self.forward_dir][self.pos[1] - 1] && self.board.rows[self.pos[0] + self.forward_dir][self.pos[1] - 1].color == "black"
                 attacks << [(self.pos[0] + self.forward_dir), (self.pos[1] - 1)]
             end
             if self.board.rows[self.pos[0] + self.forward_dir][self.pos[1] + 1] && self.board.rows[self.pos[0] + self.forward_dir][self.pos[1] + 1].color == "black"
                  attacks << [(self.pos[0] + self.forward_dir), (self.pos[1] + 1)]
             end
         elsif self.color == "black"
-            if self.board.rows[self.pos[0] + self.forward_dir][self.pos[1] - 1].color == "white"
+            if self.board.rows[self.pos[0] + self.forward_dir][self.pos[1] - 1] && self.board.rows[self.pos[0] + self.forward_dir][self.pos[1] - 1].color == "white"
                 attacks << [(self.pos[0] + self.forward_dir), (self.pos[1] - 1)]
             end
             if self.board.rows[self.pos[0] + self.forward_dir][self.pos[1] + 1] && self.board.rows[self.pos[0] + self.forward_dir][self.pos[1] + 1].color == "white"
