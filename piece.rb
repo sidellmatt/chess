@@ -11,8 +11,7 @@ class Piece
     end
 
 
-    def moves
-        # return array of positions piece can move to 
+    def moves 
     end
 
 end
