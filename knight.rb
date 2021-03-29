@@ -7,8 +7,8 @@ class Knight < Piece
     attr_reader :symbol
 
     def initialize(color, board, pos)
-        @symbol = "H"
         super(color, board, pos)
+        @symbol = "H"
     end
 
     def move_dirs

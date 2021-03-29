@@ -6,6 +6,7 @@ require_relative "queen.rb"
 require_relative "knight.rb"
 require_relative "king.rb"
 require_relative "pawn.rb"
+require "byebug"
 
 class Board
 
@@ -104,13 +105,13 @@ class Board
         opposite = ""
         if color == "white"
             opposite = "black"
-        else
+        elsif color == "black"
             opposite = "white"
         end
         king_pos = nil
         (0...rows.length).each do |row_idx|
             (0...rows.length).each do |col_idx|
-                king_pos = [row_idx, col_idx] if rows[row_idx][col_idx].symbol == "K" && rows[row_idx][col_idx].color == color
+                king_pos = [row_idx, col_idx] if self[[row_idx, col_idx]].symbol == "K" && self[[row_idx, col_idx]].color == color
             end
         end
 

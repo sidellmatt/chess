@@ -3,8 +3,8 @@ class Pawn < Piece
     attr_reader :symbol
 
     def initialize(color, board, pos)
-        @symbol = "P"
         super(color, board, pos)
+        @symbol = "p"
     end
 
     def forward_dir

@@ -7,8 +7,8 @@ class Bishop < Piece
     attr_reader :symbol
 
     def initialize(color, board, pos)
-        @symbol = "B"
         super(color, board, pos)
+        @symbol = "B"
     end
 
     def move_dirs

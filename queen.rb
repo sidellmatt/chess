@@ -7,8 +7,8 @@ class Queen < Piece
     attr_reader :symbol
 
     def initialize(color, board, pos)
-        @symbol = "Q"
         super(color, board, pos)
+        @symbol = "Q"
     end
 
     def move_dirs

@@ -7,8 +7,8 @@ class Rook < Piece
     attr_reader :symbol
 
     def initialize(color, board, pos)
-        @symbol = "R"
         super(color, board, pos)
+        @symbol = "R"
     end
 
     def move_dirs
