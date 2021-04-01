@@ -1,5 +1,7 @@
 class HumanPlayer
 
+    attr_reader :color, :display
+    
     def initialize(color, display)
         @color = color
         @display = display
@@ -7,8 +9,9 @@ class HumanPlayer
 
 
     def make_move(board)
-        move = @display.cursor.get_input
-        return move if move
+        start_pos = @display.cursor.get_input
+        end_pos = @display.cursor.get_input
+        return [start_pos, end_pos]
     end
 
 end

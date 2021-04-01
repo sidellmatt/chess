@@ -25,7 +25,9 @@ class Game
     def play
         until @board.checkmate?(:white) || @board.checkmate?(:black)
             @display.render
-            @current_player.make_move(@board)
+            move = @current_player.make_move(@board)
+            color = @current_player.color
+            @board.move_piece(color, move[0], move[1])
         end
     end
 
