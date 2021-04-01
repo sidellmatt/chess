@@ -28,6 +28,7 @@ class Game
             move = @current_player.make_move(@board)
             color = @current_player.color
             @board.move_piece(color, move[0], move[1])
+            self.switch_turn
         end
     end
 
