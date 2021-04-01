@@ -12,10 +12,10 @@ class Board
 
     attr_accessor :rows
     
-    def initialize
+    def initialize(setup = true)
         @rows = Array.new(8) { Array.new(8) }
         @null_piece = NullPiece.instance
-        self.setup_pieces
+        self.setup_pieces if setup
     end
 
 
@@ -24,37 +24,37 @@ class Board
             if row == 0
                 (0...rows.length).each do |col|
                     if col == 0 || col == 7
-                        @rows[row][col] = Rook.new("white", self, [row, col])
+                        @rows[row][col] = Rook.new(:white, self, [row, col])
                     elsif col == 1 || col == 6
-                        @rows[row][col] = Knight.new("white", self, [row, col])
+                        @rows[row][col] = Knight.new(:white, self, [row, col])
                     elsif col == 2 || col == 5
-                        @rows[row][col] = Bishop.new("white", self, [row, col])
+                        @rows[row][col] = Bishop.new(:white, self, [row, col])
                     elsif col == 3
-                        @rows[row][col] = King.new("white", self, [row, col])
+                        @rows[row][col] = King.new(:white, self, [row, col])
                     elsif col == 4
-                        @rows[row][col] = Queen.new("white", self, [row, col])
+                        @rows[row][col] = Queen.new(:white, self, [row, col])
                     end
                 end
             elsif row == 1
                 (0...rows.length).each do |col|
-                    @rows[row][col] = Pawn.new("white", self, [row, col])
+                    @rows[row][col] = Pawn.new(:white, self, [row, col])
                 end
             elsif row == 6
                 (0...rows.length).each do |col|
-                    @rows[row][col] = Pawn.new("black", self, [row, col])
+                    @rows[row][col] = Pawn.new(:black, self, [row, col])
                 end
             elsif row == 7
                 (0...rows.length).each do |col|
                     if col == 0 || col == 7
-                        @rows[row][col] = Rook.new("black", self, [row, col])
+                        @rows[row][col] = Rook.new(:black, self, [row, col])
                     elsif col == 1 || col == 6
-                        @rows[row][col] = Knight.new("black", self, [row, col])
+                        @rows[row][col] = Knight.new(:black, self, [row, col])
                     elsif col == 2 || col == 5
-                        @rows[row][col] = Bishop.new("black", self, [row, col])
+                        @rows[row][col] = Bishop.new(:black, self, [row, col])
                     elsif col == 3
-                        @rows[row][col] = King.new("black", self, [row, col])
+                        @rows[row][col] = King.new(:black, self, [row, col])
                     elsif col == 4
-                        @rows[row][col] = Queen.new("black", self, [row, col])
+                        @rows[row][col] = Queen.new(:black, self, [row, col])
                     end
                 end
             else
@@ -103,10 +103,10 @@ class Board
 
     def in_check?(color)
         opposite = ""
-        if color == "white"
-            opposite = "black"
-        elsif color == "black"
-            opposite = "white"
+        if color == :white
+            opposite = :black
+        elsif color == :black
+            opposite = :white
         end
         king_pos = nil
         (0...rows.length).each do |row_idx|
@@ -128,19 +128,31 @@ class Board
     end
 
 
-    def checkmate?(color) #have to find if any move gets them out of check, not if there are any valid pos a piece can move to
+    def checkmate?(color)
         if in_check?(color)
-            (0...rows.length).each do |row_index|
-                (0...rows.length).each do |col_index|
-                    if self[[row_index, col_index]].moves.length > 0
-                        return false
-                    end
-                end
+            if self.pieces(color).any? { |piece| piece.valid_moves.length > 0 }
+                return false
             end
             return true
-        else
-            return false
         end
+        false
+    end
+
+
+    def deep_dup
+        new_board = Board.new(false)
+        (0...8).each do |row|
+            (0...8).each do |col|
+                piece = self[[row, col]]
+                new_board[[row, col]] = piece.dup(new_board)
+            end
+        end
+        new_board
+    end
+
+
+    def pieces(color)
+        self.rows.flatten.select { |el| el.color == color }
     end
 
 end

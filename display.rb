@@ -1,10 +1,11 @@
 require_relative "board.rb"
 require "colorize"
 require_relative "cursor.rb"
+require "byebug"
 
 class Display
 
-    attr_reader :board
+    attr_reader :board, :cursor
 
     def initialize(board)
         @board = board
@@ -13,15 +14,17 @@ class Display
 
     def render
         (0...board.rows.length).each do |row_idx|
+            print "|"
             (0...board.rows.length).each do |col_idx|
-                if board.rows[row_idx][col_idx].pos == @cursor_pos
-                    p board.rows[row_idx][col_idx].symbol.colorize(:blue)
+                piece = board[[row_idx, col_idx]]
+                if [row_idx, col_idx] == @cursor.cursor_pos
+                    print piece.symbol.colorize(:red) + "|"
                 else
-                    p board.rows[row_idx][col_idx].symbol
+                    print piece.symbol.colorize(piece.color) + "|"
                 end
             end
+            puts
         end
     end
 
 end
-

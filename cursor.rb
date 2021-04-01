@@ -81,10 +81,10 @@ class Cursor
         when :return, :space
             return @cursor_pos
         when :left, :right, :up, :down
-            update_pos(key)
+            update_pos(MOVES[key])
             return nil
         when :ctrl_c
-            Process.exit(0)  ##what am i exiting here?
+            Process.exit(0)
         end
 
   end
@@ -92,9 +92,9 @@ class Cursor
   def update_pos(diff)
 
         x, y = diff[0], diff[1]
-        if @board.valid_pos([(@cursor_pos[0] += x), (@cursor_pos[1] += y)])
-            @cursor_pos[0] += x
-            @cursor_pos[1] += y
+        new_x, new_y = @cursor_pos[0] + x, @cursor_pos[1] + y
+        if @board.valid_pos?([new_x, new_y])
+            @cursor_pos = [new_x, new_y]
         end
   end
 

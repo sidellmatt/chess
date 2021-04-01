@@ -9,7 +9,12 @@ class NullPiece < Piece
 
     def initialize
         @color = "purple"
-        @symbol = nil
+        @symbol = "_"
+    end
+
+
+    def dup(l)
+        self
     end
 
 end

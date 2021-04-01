@@ -8,18 +8,18 @@ class Pawn < Piece
     end
 
     def forward_dir
-        if self.color == "white"
+        if self.color == :white
             return 1
-        elsif self.color == "black"
+        elsif self.color == :black
             return -1
         end
     end
     
     def at_start_row?
-        if self.color == "white"
+        if self.color == :white
             return true if self.pos[0] == 1
             false
-        elsif self.color == "black"
+        elsif self.color == :black
             return true if self.pos[0] == 6
             false
         end
@@ -40,14 +40,14 @@ class Pawn < Piece
 
     def side_attacks
         attacks = []
-        if self.color == "white"
+        if self.color == :white
             if self.board.rows[self.pos[0] + self.forward_dir][self.pos[1] - 1] && self.board.rows[self.pos[0] + self.forward_dir][self.pos[1] - 1].color == "black"
                 attacks << [(self.pos[0] + self.forward_dir), (self.pos[1] - 1)]
             end
             if self.board.rows[self.pos[0] + self.forward_dir][self.pos[1] + 1] && self.board.rows[self.pos[0] + self.forward_dir][self.pos[1] + 1].color == "black"
                  attacks << [(self.pos[0] + self.forward_dir), (self.pos[1] + 1)]
             end
-        elsif self.color == "black"
+        elsif self.color == :black
             if self.board.rows[self.pos[0] + self.forward_dir][self.pos[1] - 1] && self.board.rows[self.pos[0] + self.forward_dir][self.pos[1] - 1].color == "white"
                 attacks << [(self.pos[0] + self.forward_dir), (self.pos[1] - 1)]
             end
