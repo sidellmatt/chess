@@ -9,12 +9,16 @@ class NullPiece < Piece
 
     def initialize
         @color = "purple"
-        @symbol = "_"
+        @symbol = " "
     end
 
 
     def dup(l)
         self
+    end
+
+    def valid_moves
+        []
     end
 
 end

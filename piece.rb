@@ -11,7 +11,8 @@ class Piece
     end
 
 
-    def moves 
+    def moves
+        []
     end
 
 
@@ -28,7 +29,7 @@ class Piece
     def move_into_check?(end_pos)
         x, y = end_pos[0], end_pos[1]
         new_board = self.board.deep_dup
-        new_board.move_piece(self.color, self.pos, [x, y])
+        new_board.move_piece!(self.pos, [x, y])
         new_board.in_check?(self.color)
     end
 

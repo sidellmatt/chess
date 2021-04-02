@@ -86,18 +86,21 @@ class Board
 
 
     def move_piece(color, start_pos, end_pos)
-        x, y = start_pos[0], start_pos[1]
-        x2, y2 = end_pos[0], end_pos[1]
-        if self[[x,y]].color != color
-            raise ArgumentError.new "No piece at start pos"
+        
+        if self[start_pos].valid_moves.include?(end_pos) && self[start_pos].color == color
+            self.move_piece!(start_pos, end_pos)
+        else
+            raise MoveError.new "Invalid move"
         end
-        if self[[x2,y2]].color != "purple"
-            raise ArgumentError.new "Cannot move there" 
-        end
-        piece = self[[x,y]]
-        self[[x2,y2]] = piece
-        self[[x,y]] = @null_piece
-        piece.pos = [x2, y2]
+        
+    end
+
+
+    def move_piece!(start_pos, end_pos)
+        piece = self[start_pos]
+        self[end_pos] = piece
+        self[start_pos] = @null_piece
+        piece.pos = end_pos
     end
 
 
@@ -155,4 +158,12 @@ class Board
         self.rows.flatten.select { |el| el.color == color }
     end
 
+
+    def has_moves?(color)
+        current_pieces = self.pieces(color)
+        return current_pieces.all? { |piece| piece.valid_moves.empty? }
+    end
+
 end
+
+class MoveError < ArgumentError; end
